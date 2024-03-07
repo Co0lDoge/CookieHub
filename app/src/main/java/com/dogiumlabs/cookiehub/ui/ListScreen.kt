@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,8 +30,16 @@ import com.dogiumlabs.cookiehub.data.Cookie
 import com.dogiumlabs.cookiehub.data.getCookiesList
 
 @Composable
-fun ListScreen() {
-    //TODO
+fun ListScreen(
+    cookiesList: List<Cookie>
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy((-8).dp)
+    ) {
+        cookiesList.forEach {cookie ->
+            CookieCard(cookie)
+        }
+    }
 }
 
 @Composable
@@ -41,7 +51,7 @@ fun CookieCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
         ),
-        modifier = modifier
+        modifier = modifier.padding(8.dp)
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -54,11 +64,11 @@ fun CookieCard(
             ) {
                 Text(
                     text = stringResource(cookie.name),
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.displaySmall
                 )
                 Text(
                     text = stringResource(cookie.description),
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
@@ -72,6 +82,14 @@ fun CookieCard(
                     .clip(RoundedCornerShape(8.dp))
             )
         }
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun ListScreenPreview() {
+    CookieHubTheme {
+        ListScreen(getCookiesList())
     }
 }
 

@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dogiumlabs.cookiehub.data.getCookiesList
 
 enum class CookieApp(/***TODO @StringRes title***/) {
     HOME,
@@ -24,7 +25,7 @@ fun CookieApp(
 ) {
     NavHost(
         navController = navController,
-        startDestination = CookieApp.HOME.name,
+        startDestination = CookieApp.LIST.name,
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
@@ -33,7 +34,7 @@ fun CookieApp(
             HomeScreen()
         }
         composable(route = CookieApp.LIST.name) {
-            ListScreen()
+            ListScreen(cookiesList = getCookiesList())
         }
         composable(route = CookieApp.DETAILS.name) {
             DetailsScreen()
