@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CookieHub</string>
+    <string name="cookie_name_1">Caramel Bliss Cookies</string>
+    <string name="cookie_description_1">These heavenly cookies combine the rich flavors of buttery
+        caramel and velvety chocolate.</string>
+    <string name="cookie_name_2">Lemon Zest Delights</string>
+    <string name="cookie_description_2">These delicate cookies feature a tender crumb infused with
+        fresh lemon zest, creating a bright and tangy flavor profile.</string>
 </resources>
