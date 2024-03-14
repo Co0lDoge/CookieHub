@@ -1,6 +1,5 @@
 package com.dogiumlabs.cookiehub.data
 
-import androidx.compose.ui.res.stringResource
 import com.dogiumlabs.cookiehub.R
 
 fun getCookiesList(): List<Cookie> {
