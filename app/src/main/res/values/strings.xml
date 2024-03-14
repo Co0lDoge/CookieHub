@@ -6,4 +6,22 @@
     <string name="cookie_name_2">Lemon Zest Delights</string>
     <string name="cookie_description_2">These delicate cookies feature a tender crumb infused with
         fresh lemon zest, creating a bright and tangy flavor profile.</string>
+    <string name="cookie_name_3">Cocoa Espresso Bites</string>
+    <string name="cookie_description_3">These bite-sized cookies are a harmonious blend of intense
+        cocoa and robust espresso. Each morsel delivers a delightful jolt of flavor.</string>
+    <string name="cookie_name_4">Almond Amaretto Gems</string>
+    <string name="cookie_description_4">These gems are adorned with toasted almond slivers and
+        infused with the sweet essence of amaretto liqueur. A sophisticated treat for any occasion.</string>
+    <string name="cookie_name_5">Cherry Almond Blossoms</string>
+    <string name="cookie_description_5">Delicate almond cookies studded with dried cherries, these
+        blossoms offer a delightful balance of nuttiness and fruity sweetness.</string>
+    <string name="cookie_name_6">Matcha White Chocolate Clouds</string>
+    <string name="cookie_description_6">Light and airy, these cookies feature matcha green tea
+        powder and creamy white chocolate. They melt in your mouth, leaving a serene aftertaste.</string>
+    <string name="cookie_name_7">Pistachio Rose Petal Shortbreads</string>
+    <string name="cookie_description_7">Fragrant rose petals adorn these buttery shortbread cookies,
+        while crushed pistachios add a delightful crunch. Perfect for an elegant tea party.</string>
+    <string name="cookie_name_8">Ginger Molasses Spice Rounds</string>
+    <string name="cookie_description_8">Warm spices, molasses, and a hint of ginger come together
+        in these comforting rounds. They’re like a cozy hug for your taste buds.</string>
 </resources>
