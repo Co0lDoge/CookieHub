@@ -1,4 +1,5 @@
 package com.dogiumlabs.cookiehub.model
 
-class CookieHubUiState {
-}
+data class CookieHubUiState (
+    val currentScreen: Int
+)
