@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -37,7 +38,7 @@ fun CookieApp(
 
     Scaffold(
         topBar = {
-            CookieAppTopBar(currentScreen.title)
+            CookieAppTopBar(stringResource(currentScreen.title))
         },
         bottomBar = {
             CookieAppNavigationBar(
@@ -91,7 +92,7 @@ fun CookieAppNavigationBar(
     val navItems = CookieNavItem.entries
 
     NavigationBar {
-        navItems.forEachIndexed { index, navigationItem ->
+        navItems.forEach { navigationItem ->
             NavigationBarItem(
                 selected = screenName == navigationItem.name,
                 onClick = { navController.navigate(navigationItem.name) },
@@ -104,7 +105,7 @@ fun CookieAppNavigationBar(
                         },
                         contentDescription = null
                     ) },
-                label = { Text(navigationItem.title) }
+                label = { Text(stringResource(navigationItem.title)) }
             )
         }
     }

@@ -24,4 +24,7 @@
     <string name="cookie_name_8">Ginger Molasses Spice Rounds</string>
     <string name="cookie_description_8">Warm spices, molasses, and a hint of ginger come together
         in these comforting rounds. They’re like a cozy hug for your taste buds.</string>
+    <string name="home">Home</string>
+    <string name="recipes">Recipes</string>
+    <string name="clicker">Clicker</string>
 </resources>
