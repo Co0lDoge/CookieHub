@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,19 +22,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
-import com.dogiumlabs.cookiehub.R
 import com.dogiumlabs.cookiehub.data.Cookie
 import com.dogiumlabs.cookiehub.data.getCookiesList
+import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 
 @Composable
 fun ListScreen(
     cookiesList: List<Cookie>
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy((-8).dp)
-    ) {
-        cookiesList.forEach {cookie ->
+    Column {
+        cookiesList.forEach { cookie ->
             CookieCard(cookie)
         }
     }
