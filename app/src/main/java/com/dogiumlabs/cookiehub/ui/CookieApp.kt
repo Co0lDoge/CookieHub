@@ -61,7 +61,7 @@ fun CookieApp(
             composable(route = CookieNavItem.LIST.name) {
                 ListScreen(cookiesList = getCookiesList())
             }
-            composable(route = CookieNavItem.DETAILS.name) {
+            composable(route = CookieNavItem.CLICKER.name) {
                 DetailsScreen()
             }
         }

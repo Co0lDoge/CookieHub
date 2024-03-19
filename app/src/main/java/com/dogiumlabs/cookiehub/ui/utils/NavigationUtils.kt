@@ -28,7 +28,7 @@ enum class CookieNavItem(
         selectedIcon = Icons.Filled.List,
         unselectedIcon = Icons.Outlined.List
     ),
-    DETAILS(
+    CLICKER(
         title = R.string.clicker,
         selectedIcon = Icons.Filled.ThumbUp,
         unselectedIcon = Icons.Outlined.ThumbUp
