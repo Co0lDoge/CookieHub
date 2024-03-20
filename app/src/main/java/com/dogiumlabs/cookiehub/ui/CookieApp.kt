@@ -8,8 +8,12 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,8 +37,11 @@ fun CookieApp(
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = CookieNavItem.valueOf(
-        backStackEntry?.destination?.route ?: CookieNavItem.LIST.name
+        backStackEntry?.destination?.route ?: CookieNavItem.Recipes.name
     )
+
+    // List of all navigation items
+    val navItems = CookieNavItem.entries
 
     Scaffold(
         topBar = {
@@ -43,13 +50,14 @@ fun CookieApp(
         bottomBar = {
             CookieAppNavigationBar(
                 navController = navController,
+                navItems = navItems,
                 screenName = currentScreen.name
             )
         }
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = CookieNavItem.LIST.name,
+            startDestination = CookieNavItem.Recipes.name,
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -58,11 +66,11 @@ fun CookieApp(
             composable(route = CookieNavItem.HOME.name) {
                 HomeScreen()
             }
-            composable(route = CookieNavItem.LIST.name) {
+            composable(route = CookieNavItem.Recipes.name) {
                 ListScreen(cookiesList = getCookiesList())
             }
             composable(route = CookieNavItem.CLICKER.name) {
-                DetailsScreen()
+                ClickerScreen()
             }
         }
     }
@@ -84,13 +92,10 @@ fun CookieAppTopBar(title: String) {
 @Composable
 fun CookieAppNavigationBar(
     navController: NavHostController,
+    navItems: List<CookieNavItem>,
     screenName: String
 ) {
     /** Bar for low dp devices **/
-
-    // List of all navigation items
-    val navItems = CookieNavItem.entries
-
     NavigationBar {
         navItems.forEach { navigationItem ->
             NavigationBarItem(
@@ -112,15 +117,39 @@ fun CookieAppNavigationBar(
 }
 
 @Composable
-fun CookieAppNavigationRail() {
+fun CookieAppNavigationRail(
+    navController: NavHostController,
+    navItems: List<CookieNavItem>,
+    screenName: String
+) {
     /** Bar for medium dp devices **/
-    //TODO
+    NavigationRail {
+        navItems.forEach { navigationItem ->
+            NavigationRailItem(
+                selected = screenName == navigationItem.name,
+                onClick = { navController.navigate(navigationItem.name) },
+                icon = {
+                    Icon(
+                        imageVector = if (screenName == navigationItem.name) {
+                            navigationItem.selectedIcon
+                        } else {
+                            navigationItem.unselectedIcon
+                        },
+                        contentDescription = null
+                    ) },
+                label = { Text(stringResource(navigationItem.title)) }
+            )
+        }
+    }
 }
 
 @Composable
-fun CookieAppNavigationDrawer() {
-    /** Bar for high dp devices **/
-    //TODO
+fun CookieAppNavigationDrawer(
+    navController: NavHostController,
+    navItems: List<CookieNavItem>,
+    screenName: String
+) {
+    /*TODO*/
 }
 
 @Composable

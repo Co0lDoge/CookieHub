@@ -23,7 +23,7 @@ enum class CookieNavItem(
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home
     ),
-    LIST(
+    Recipes(
         title = R.string.recipes,
         selectedIcon = Icons.Filled.List,
         unselectedIcon = Icons.Outlined.List
