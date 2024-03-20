@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogiumlabs.cookiehub.data.Cookie
-import com.dogiumlabs.cookiehub.data.getCookiesList
+import com.dogiumlabs.cookiehub.data.CookieDataSource
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 
 @Composable
@@ -84,7 +84,7 @@ fun CookieCard(
 @Preview(showBackground = true)
 fun ListScreenPreview() {
     CookieHubTheme {
-        ListScreen(getCookiesList())
+        ListScreen(CookieDataSource.getCookiesList())
     }
 }
 
@@ -92,6 +92,6 @@ fun ListScreenPreview() {
 @Preview
 fun CardPreview() {
     CookieHubTheme {
-        CookieCard(getCookiesList()[0])
+        CookieCard(CookieDataSource.getCookiesList()[0])
     }
 }

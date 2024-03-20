@@ -8,25 +8,25 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.dogiumlabs.cookiehub.data.getCookiesList
+import com.dogiumlabs.cookiehub.model.CookieHubViewModel
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 import com.dogiumlabs.cookiehub.ui.utils.CookieNavItem
 
@@ -35,6 +35,7 @@ import com.dogiumlabs.cookiehub.ui.utils.CookieNavItem
 fun CookieApp(
     navController: NavHostController = rememberNavController()
 ) {
+    // Values related to navigation
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = CookieNavItem.valueOf(
         backStackEntry?.destination?.route ?: CookieNavItem.Recipes.name
@@ -42,6 +43,9 @@ fun CookieApp(
 
     // List of all navigation items
     val navItems = CookieNavItem.entries
+
+    val viewModel: CookieHubViewModel = viewModel()
+    val uiState = viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -67,7 +71,7 @@ fun CookieApp(
                 HomeScreen()
             }
             composable(route = CookieNavItem.Recipes.name) {
-                ListScreen(cookiesList = getCookiesList())
+                ListScreen(cookiesList = uiState.value.cookieList)
             }
             composable(route = CookieNavItem.CLICKER.name) {
                 ClickerScreen()
@@ -109,7 +113,8 @@ fun CookieAppNavigationBar(
                             navigationItem.unselectedIcon
                         },
                         contentDescription = null
-                    ) },
+                    )
+                },
                 label = { Text(stringResource(navigationItem.title)) }
             )
         }
@@ -136,7 +141,8 @@ fun CookieAppNavigationRail(
                             navigationItem.unselectedIcon
                         },
                         contentDescription = null
-                    ) },
+                    )
+                },
                 label = { Text(stringResource(navigationItem.title)) }
             )
         }
