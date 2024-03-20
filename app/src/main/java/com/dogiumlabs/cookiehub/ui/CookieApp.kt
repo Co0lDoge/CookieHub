@@ -1,5 +1,6 @@
 package com.dogiumlabs.cookiehub.ui
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,10 +31,12 @@ import androidx.navigation.compose.rememberNavController
 import com.dogiumlabs.cookiehub.model.CookieHubViewModel
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 import com.dogiumlabs.cookiehub.ui.utils.CookieNavItem
+import com.dogiumlabs.cookiehub.ui.utils.CookieNavigationType
 
 
 @Composable
 fun CookieApp(
+    windowSize: WindowWidthSizeClass,
     navController: NavHostController = rememberNavController()
 ) {
     // Values related to navigation
@@ -44,6 +48,13 @@ fun CookieApp(
     // List of all navigation items
     val navItems = CookieNavItem.entries
 
+    val navigationType = when(windowSize) {
+        WindowWidthSizeClass.Compact -> CookieNavigationType.BOTTOM_NAVIGATION
+        WindowWidthSizeClass.Medium -> CookieNavigationType.NAVIGATION_RAIL
+        WindowWidthSizeClass.Expanded -> CookieNavigationType.NAVIGATION_RAIL
+        else -> CookieNavigationType.BOTTOM_NAVIGATION
+    }
+
     val viewModel: CookieHubViewModel = viewModel()
     val uiState = viewModel.uiState.collectAsState()
 
@@ -52,29 +63,39 @@ fun CookieApp(
             CookieAppTopBar(stringResource(currentScreen.title))
         },
         bottomBar = {
-            CookieAppNavigationBar(
-                navController = navController,
-                navItems = navItems,
-                screenName = currentScreen.name
-            )
+            if (navigationType == CookieNavigationType.BOTTOM_NAVIGATION)
+                CookieAppNavigationBar(
+                    navController = navController,
+                    navItems = navItems,
+                    screenName = currentScreen.name
+                )
         }
     ) { paddingValues ->
-        NavHost(
-            navController = navController,
-            startDestination = CookieNavItem.Recipes.name,
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(paddingValues)
+        Row(
+            modifier = Modifier.padding(paddingValues)
         ) {
-            composable(route = CookieNavItem.HOME.name) {
-                HomeScreen()
-            }
-            composable(route = CookieNavItem.Recipes.name) {
-                ListScreen(cookiesList = uiState.value.cookieList)
-            }
-            composable(route = CookieNavItem.CLICKER.name) {
-                ClickerScreen()
+            if (navigationType == CookieNavigationType.NAVIGATION_RAIL)
+                CookieAppNavigationRail(
+                    navController = navController,
+                    navItems = navItems,
+                    screenName = currentScreen.name
+                )
+            NavHost(
+                navController = navController,
+                startDestination = CookieNavItem.Recipes.name,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
+                composable(route = CookieNavItem.HOME.name) {
+                    HomeScreen()
+                }
+                composable(route = CookieNavItem.Recipes.name) {
+                    ListScreen(cookiesList = uiState.value.cookieList)
+                }
+                composable(route = CookieNavItem.CLICKER.name) {
+                    ClickerScreen()
+                }
             }
         }
     }
@@ -160,8 +181,16 @@ fun CookieAppNavigationDrawer(
 
 @Composable
 @Preview
-fun CookieAppPreview() {
+fun CookieAppCompactPreview() {
     CookieHubTheme {
-        CookieApp()
+        CookieApp(WindowWidthSizeClass.Compact)
+    }
+}
+
+@Composable
+@Preview(widthDp = 600)
+fun CookieAppMediumPreview() {
+    CookieHubTheme {
+        CookieApp(WindowWidthSizeClass.Medium)
     }
 }

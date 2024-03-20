@@ -34,3 +34,7 @@ enum class CookieNavItem(
         unselectedIcon = Icons.Outlined.ThumbUp
     )
 }
+
+enum class CookieNavigationType {
+    BOTTOM_NAVIGATION, NAVIGATION_RAIL
+}

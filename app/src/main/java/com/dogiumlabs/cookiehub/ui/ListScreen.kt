@@ -28,7 +28,8 @@ import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 
 @Composable
 fun ListScreen(
-    cookiesList: List<Cookie>
+    cookiesList: List<Cookie>,
+    modifier: Modifier = Modifier
 ) {
     Column {
         cookiesList.forEach { cookie ->
