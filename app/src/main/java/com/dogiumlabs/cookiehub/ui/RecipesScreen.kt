@@ -1,12 +1,15 @@
 package com.dogiumlabs.cookiehub.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dogiumlabs.cookiehub.data.Cookie
 import com.dogiumlabs.cookiehub.data.CookieDataSource
+import com.dogiumlabs.cookiehub.ui.components.DetailsScreen
+import com.dogiumlabs.cookiehub.ui.components.ListScreen
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 import com.dogiumlabs.cookiehub.ui.utils.CookieContentType
 
@@ -34,20 +37,23 @@ fun RecipesScreen(
             )
         }
         else {
-            if (!isShowingDetails)
+            AnimatedVisibility(visible = !isShowingDetails) {
                 ListScreen(
                     cookiesList = cookiesList,
                     onItemClick = onListItemClick,
                     modifier = Modifier
                 )
-            else
+            }
+            AnimatedVisibility(visible = isShowingDetails) {
                 BackHandler {
+                    // Returns to cookies list if only details are shown
                     onBackPressed()
                 }
                 DetailsScreen(
                     cookie = currentCookie,
                     modifier = Modifier
                 )
+            }
         }
     }
 }

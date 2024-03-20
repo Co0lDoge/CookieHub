@@ -1,4 +1,4 @@
-package com.dogiumlabs.cookiehub.ui
+package com.dogiumlabs.cookiehub.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
