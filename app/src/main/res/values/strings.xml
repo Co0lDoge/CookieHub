@@ -28,4 +28,7 @@
     <string name="recipes">Recipes</string>
     <string name="clicker">Clicker</string>
     <string name="back_button">Back button</string>
+    <string name="home_screen_error_text">Hi, {USERNAME}, welcome to your home screen. This screen is currently unavailable. While you wait, enjoy your cookies</string>
+    <string name="clicker_screen_placeholder_text">This screen is under construction.</string>
+    <string name="recipe_intro_text">This is recipe of %1$s</string>
 </resources>
