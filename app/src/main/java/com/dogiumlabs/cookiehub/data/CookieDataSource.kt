@@ -3,6 +3,8 @@ package com.dogiumlabs.cookiehub.data
 import com.dogiumlabs.cookiehub.R
 
 object CookieDataSource {
+
+    val defaultCookie = getCookiesList()[0]
     public fun getCookiesList(): List<Cookie> {
         return listOf(
             Cookie(

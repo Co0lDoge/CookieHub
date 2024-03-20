@@ -3,8 +3,6 @@ package com.dogiumlabs.cookiehub.ui
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -54,7 +52,10 @@ fun CookieApp(
         WindowWidthSizeClass.Compact -> Pair(
             CookieNavigationType.BOTTOM_NAVIGATION, CookieContentType.LIST_ONLY
         )
-        WindowWidthSizeClass.Medium, WindowWidthSizeClass.Expanded -> Pair(
+        WindowWidthSizeClass.Medium, -> Pair(
+            CookieNavigationType.NAVIGATION_RAIL, CookieContentType.LIST_ONLY
+        )
+        WindowWidthSizeClass.Expanded, -> Pair(
             CookieNavigationType.NAVIGATION_RAIL, CookieContentType.LIST_AND_DETAILS
         )
         else -> Pair(
@@ -92,13 +93,19 @@ fun CookieApp(
                 startDestination = CookieNavItem.Recipes.name,
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
             ) {
                 composable(route = CookieNavItem.HOME.name) {
                     HomeScreen()
                 }
                 composable(route = CookieNavItem.Recipes.name) {
-                    ListScreen(cookiesList = uiState.value.cookieList)
+                    RecipesScreen(
+                        cookiesList = uiState.value.cookieList,
+                        currentCookie = uiState.value.currentCookie,
+                        isShowingDetails = uiState.value.isShowingDetails,
+                        onBackPressed = { viewModel.navigateToList() },
+                        onListItemClick = { viewModel.navigateToDetails(it) },
+                        contentType = contentType
+                    )
                 }
                 composable(route = CookieNavItem.CLICKER.name) {
                     ClickerScreen()
@@ -199,5 +206,13 @@ fun CookieAppCompactPreview() {
 fun CookieAppMediumPreview() {
     CookieHubTheme {
         CookieApp(WindowWidthSizeClass.Medium)
+    }
+}
+
+@Composable
+@Preview(widthDp = 800)
+fun CookieAppExpandedPreview() {
+    CookieHubTheme {
+        CookieApp(WindowWidthSizeClass.Expanded)
     }
 }
