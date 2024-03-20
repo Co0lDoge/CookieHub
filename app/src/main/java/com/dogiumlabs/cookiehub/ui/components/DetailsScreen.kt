@@ -17,9 +17,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 import com.dogiumlabs.cookiehub.data.Cookie
 import com.dogiumlabs.cookiehub.data.CookieDataSource
+import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 
 @Composable
 fun DetailsScreen(
@@ -39,7 +39,8 @@ fun DetailsScreen(
         )
         Text(
             text = "This is recipe of ${stringResource(cookie.name)}",
-            style = MaterialTheme.typography.titleMedium)
+            style = MaterialTheme.typography.titleMedium
+        )
         Text(
             text = stringResource(cookie.description),
             style = MaterialTheme.typography.bodyLarge,

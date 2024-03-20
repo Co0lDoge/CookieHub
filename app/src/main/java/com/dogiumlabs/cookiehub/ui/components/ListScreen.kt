@@ -35,9 +35,10 @@ fun ListScreen(
     onItemClick: (Cookie) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier
-        .verticalScroll(rememberScrollState())
-        .fillMaxSize()
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
     ) {
         cookiesList.forEach { cookie ->
             CookieCard(
@@ -99,7 +100,7 @@ fun ListScreenPreview() {
     CookieHubTheme {
         ListScreen(
             cookiesList = CookieDataSource.getCookiesList(),
-            onItemClick = {  }
+            onItemClick = { }
         )
     }
 }
@@ -110,7 +111,7 @@ fun CardPreview() {
     CookieHubTheme {
         CookieCard(
             cookie = CookieDataSource.getCookiesList()[0],
-            onClick = {  }
+            onClick = { }
         )
     }
 }

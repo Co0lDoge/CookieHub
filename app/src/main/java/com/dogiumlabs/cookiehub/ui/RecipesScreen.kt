@@ -35,8 +35,7 @@ fun RecipesScreen(
                 cookie = currentCookie,
                 modifier = Modifier.weight(3f)
             )
-        }
-        else {
+        } else {
             AnimatedVisibility(visible = !isShowingDetails) {
                 ListScreen(
                     cookiesList = cookiesList,
