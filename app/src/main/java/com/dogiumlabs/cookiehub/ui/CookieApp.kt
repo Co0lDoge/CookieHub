@@ -80,7 +80,8 @@ fun CookieApp(
                 // Show back button if only details list is present (contentType is LIST_ONLY)
                 title = stringResource(currentScreen.title),
                 isShowingNavButton = uiState.value.isShowingDetails
-                        && contentType == CookieContentType.LIST_ONLY,
+                        && contentType == CookieContentType.LIST_ONLY
+                        && currentScreen == CookieNavItem.Recipes,
                 onIconClick = { viewModel.navigateToList() }
             )
         },
