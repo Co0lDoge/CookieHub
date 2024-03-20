@@ -31,7 +31,7 @@ fun ListScreen(
     cookiesList: List<Cookie>,
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(modifier = modifier) {
         cookiesList.forEach { cookie ->
             CookieCard(cookie)
         }

@@ -16,8 +16,7 @@ enum class CookieNavItem(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 ) {
-    /** This class defines navigation routes.
-     * For ui navigation items visit NavigationUtils **/
+    /** This class defines navigation routes. **/
     HOME(
         title = R.string.home,
         selectedIcon = Icons.Filled.Home,
@@ -37,4 +36,8 @@ enum class CookieNavItem(
 
 enum class CookieNavigationType {
     BOTTOM_NAVIGATION, NAVIGATION_RAIL
+}
+
+enum class CookieContentType {
+    LIST_ONLY, LIST_AND_DETAILS
 }

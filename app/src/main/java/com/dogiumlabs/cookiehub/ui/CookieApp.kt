@@ -30,6 +30,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.dogiumlabs.cookiehub.model.CookieHubViewModel
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
+import com.dogiumlabs.cookiehub.ui.utils.CookieContentType
 import com.dogiumlabs.cookiehub.ui.utils.CookieNavItem
 import com.dogiumlabs.cookiehub.ui.utils.CookieNavigationType
 
@@ -48,11 +49,17 @@ fun CookieApp(
     // List of all navigation items
     val navItems = CookieNavItem.entries
 
-    val navigationType = when(windowSize) {
-        WindowWidthSizeClass.Compact -> CookieNavigationType.BOTTOM_NAVIGATION
-        WindowWidthSizeClass.Medium -> CookieNavigationType.NAVIGATION_RAIL
-        WindowWidthSizeClass.Expanded -> CookieNavigationType.NAVIGATION_RAIL
-        else -> CookieNavigationType.BOTTOM_NAVIGATION
+    // Values that defines layout of navigation and screens
+    val (navigationType, contentType) = when (windowSize) {
+        WindowWidthSizeClass.Compact -> Pair(
+            CookieNavigationType.BOTTOM_NAVIGATION, CookieContentType.LIST_ONLY
+        )
+        WindowWidthSizeClass.Medium, WindowWidthSizeClass.Expanded -> Pair(
+            CookieNavigationType.NAVIGATION_RAIL, CookieContentType.LIST_AND_DETAILS
+        )
+        else -> Pair(
+            CookieNavigationType.BOTTOM_NAVIGATION, CookieContentType.LIST_ONLY
+        )
     }
 
     val viewModel: CookieHubViewModel = viewModel()
