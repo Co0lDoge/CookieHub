@@ -1,14 +1,17 @@
-package com.dogiumlabs.cookiehub.ui
+package com.dogiumlabs.cookiehub.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -23,16 +26,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogiumlabs.cookiehub.data.Cookie
-import com.dogiumlabs.cookiehub.data.getCookiesList
+import com.dogiumlabs.cookiehub.data.CookieDataSource
 import com.dogiumlabs.cookiehub.ui.theme.CookieHubTheme
 
 @Composable
 fun ListScreen(
-    cookiesList: List<Cookie>
+    cookiesList: List<Cookie>,
+    onItemClick: (Cookie) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+    ) {
         cookiesList.forEach { cookie ->
-            CookieCard(cookie)
+            CookieCard(
+                cookie = cookie,
+                onClick = onItemClick
+            )
         }
     }
 }
@@ -40,12 +52,14 @@ fun ListScreen(
 @Composable
 fun CookieCard(
     cookie: Cookie,
+    onClick: (Cookie) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
         ),
+        onClick = { onClick(cookie) },
         modifier = modifier.padding(8.dp)
     ) {
         Row(
@@ -84,7 +98,10 @@ fun CookieCard(
 @Preview(showBackground = true)
 fun ListScreenPreview() {
     CookieHubTheme {
-        ListScreen(getCookiesList())
+        ListScreen(
+            cookiesList = CookieDataSource.getCookiesList(),
+            onItemClick = { }
+        )
     }
 }
 
@@ -92,6 +109,9 @@ fun ListScreenPreview() {
 @Preview
 fun CardPreview() {
     CookieHubTheme {
-        CookieCard(getCookiesList()[0])
+        CookieCard(
+            cookie = CookieDataSource.getCookiesList()[0],
+            onClick = { }
+        )
     }
 }
